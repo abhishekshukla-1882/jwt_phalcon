@@ -68,4 +68,8 @@ class IndexController extends Controller
     public function addproductAction(){
         
     }
+    public function listAction(){
+        $this->view->data=Products::find();
+
+    }
 }
