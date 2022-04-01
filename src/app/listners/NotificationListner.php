@@ -1,5 +1,8 @@
 <?php
 namespace App\Listeners;
+include(APP_PATH . '/library/vendor/autoload.php');
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Phalcon\Mvc\Collection;
 use Phalcon\Di\Injectable;
 use Phalcon\Events\Event;
@@ -29,10 +32,29 @@ Class NotificationListner extends Injectable
             // echo $controller , $action;
             // die;
             try {
-                $parser = new Parser();
-                $role = $parser->parse($bearer)->getClaims()->getPayload()['sub'];
-                echo $role;
-                die;
+                 $key = "key";
+
+                // $parser = new Parser();
+                echo $key;
+                echo '<br>',$bearer,'<br>';
+                // $role = $parser->parse($bearer)->getClaims()->getPayload()['sub'];
+                $decoded = JWT::decode($bearer, new Key($key, 'HS256'));
+                // echo $decoded;
+                // die;
+                $decoded_array = (array) $decoded;
+                $role = $decoded_array['role'];
+
+                // echo "<pre>";
+                // print_r($decoded_array);
+                // die;
+
+                // $role = $parser->parse($bearer)->getClaims()->getPayload();
+                // $r = $role['sub'];
+                // echo "<pre>";
+                // print_r($role);
+                // echo $r,'<br>',$controller,'<br>',$action;
+                // die;
+
 
             } catch (\Exception $e) {
                 echo "Try valid token please !";
