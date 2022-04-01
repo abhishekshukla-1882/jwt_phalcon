@@ -15,7 +15,7 @@ Class NotificationListner extends Injectable
 
     }
     public function beforeHandleRequest(Event $event, \Phalcon\Mvc\Application $application){
-        echo "hii";
+        // echo "hii";
         // die;
         // $role = $application->request->get('role');
         // echo $role;
