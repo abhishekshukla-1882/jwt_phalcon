@@ -46,7 +46,7 @@ class RoleController extends Controller
         // print_r($postdata);
         // die;
         echo "h";
-        die;
+        // die;
         $request = new Request();
         $data = new Components();
         $comp = $this->request->getpost('component');
