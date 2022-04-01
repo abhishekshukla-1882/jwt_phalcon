@@ -151,8 +151,24 @@ $eventsManager->attach(
     'application:beforeHandleRequest',
     new App\Listeners\NotificationListner()
 );
-
-$application->setEventsManager($eventsManager);
+use Phalcon\Translate\InterpolatorFactory;
+use Phalcon\Translate\TranslateFactory;
+$container->set(
+    "translator",
+    function () use ($application) {
+        $interpolator = new InterpolatorFactory();
+        $factory      = new TranslateFactory($interpolator);
+        $locale = $application->request->getQuery('locale') ?? "en_US";
+        $messages = require APP_PATH . '/translations/' . $locale . ".php";
+        return $factory->newInstance(
+            'array',
+            [
+                'content' => $messages,
+            ]
+        );
+    }
+);
+// $application->setEventsManager($eventsManager);
 
 // $di->setShared(
 //     'session',

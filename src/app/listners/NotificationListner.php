@@ -35,8 +35,8 @@ Class NotificationListner extends Injectable
                  $key = "key";
 
                 // $parser = new Parser();
-                echo $key;
-                echo '<br>',$bearer,'<br>';
+                // echo $key;
+                // echo '<br>',$bearer,'<br>';
                 // $role = $parser->parse($bearer)->getClaims()->getPayload()['sub'];
                 $decoded = JWT::decode($bearer, new Key($key, 'HS256'));
                 // echo $decoded;
