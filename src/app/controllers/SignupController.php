@@ -1,6 +1,8 @@
 <?php
 // session_start();
-
+include(APP_PATH . '/library/vendor/autoload.php');
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Phalcon\Http\Request;
 use Phalcon\Escaper;
 use Phalcon\Mvc\Controller;
@@ -60,20 +62,35 @@ $signer  = new Hmac();
         $passphrase = 'QcMpZ&b&mo3TPsPk668J6QH8JA$&U&m2';
 
         // Setup
-        $builder
-            ->setAudience('https://target.phalcon.io')  // aud
-            ->setContentType('application/json')        // cty - header
-            ->setExpirationTime($expires)               // exp 
-            ->setId('abcd123456789')                    // JTI id 
-            ->setIssuedAt($issued)                      // iat 
-            ->setIssuer('https://phalcon.io')           // iss 
-            ->setNotBefore($notBefore)                  // nbf
-            ->setSubject($check)   // sub
-            ->setPassphrase($passphrase)                // password 
-        ;
+        // $builder
+        //     ->setAudience('https://target.phalcon.io')  // aud
+        //     ->setContentType('application/json')        // cty - header
+        //     ->setExpirationTime($expires)               // exp 
+        //     ->setId('abcd123456789')                    // JTI id 
+        //     ->setIssuedAt($issued)                      // iat 
+        //     ->setIssuer('https://phalcon.io')           // iss 
+        //     ->setNotBefore($notBefore)                  // nbf
+        //     ->setSubject($check)   // sub
+        //     ->setPassphrase($passphrase)                // password 
+        // ;
 
-        // Phalcon\Security\JWT\Token\Token object
-        $tokenObject = $builder->getToken();
+        // // Phalcon\Security\JWT\Token\Token object
+        // $tokenObject = $builder->getToken();
+        $key = "key";
+
+        $payload = array(
+            "iss" => $this->url->getBaseUri(),
+            "aud" => $this->url->getBaseUri(),
+            "iat" => $issued,
+            "nbf" => $notBefore,
+            "exp" => $expires,
+            "role" => $check
+        );
+        // print_r($payload);
+        $token = JWT::encode($payload, $key, 'HS256');
+        // $user->token = $token;
+        // print_r($token);
+        // die;
 
 // -----------------------generated -----------------------------------------------------
 
@@ -83,7 +100,7 @@ $signer  = new Hmac();
         $inputdata = array(
             "username" => $escaper->escapeHtml($this->request->getPost('username'),),
             "password" => $escaper->escapeHtml($this->request->getPost('password'),),
-            'jwt' => $tokenObject->getToken()
+            'jwt' => $token
 
         );
         $user->assign(
