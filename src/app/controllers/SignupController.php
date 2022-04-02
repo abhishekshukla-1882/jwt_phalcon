@@ -39,23 +39,13 @@ class SignupController extends Controller
             $password = $request->get('password');
             $check = $request->get('check');
         }
-        // echo $check;
-        // $data = $this->model('Users')::find_by_username($username);
-        // $data = Users::query()
-        // ->insert
-        // ->where("username = '$username'")
-        // ->andWhere("password = '$password'")
-        // ->execute();
-        // print_r($data);
-// --------------- JWT Token Generator --------------------------------------///\
 
-
-$signer  = new Hmac();
+        signer  = new Hmac();
 
         // Builder object
         $builder = new Builder($signer);
 
-        $now        = new DateTimeImmutable();
+        $now        = new \DateTimeImmutable();
         $issued     = $now->getTimestamp();
         $notBefore  = $now->modify('-1 minute')->getTimestamp();
         $expires    = $now->modify('+1 day')->getTimestamp();

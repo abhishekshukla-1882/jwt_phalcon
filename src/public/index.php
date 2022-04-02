@@ -19,6 +19,7 @@ use Phalcon\Session\Adapter\Stream;
 use Phalcon\Config;
 use Phalcon\Config\ConfigFactory;
 
+
 use Phalcon\Events\Event;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
@@ -151,6 +152,8 @@ $eventsManager->attach(
     'application:beforeHandleRequest',
     new App\Listeners\NotificationListner()
 );
+
+// --------Trnslator ----------------------
 use Phalcon\Translate\InterpolatorFactory;
 use Phalcon\Translate\TranslateFactory;
 $container->set(
