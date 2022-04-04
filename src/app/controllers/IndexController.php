@@ -10,8 +10,10 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-
-
+        
+        // $this->cache->set("name","shukla");
+        // die($this->cache->get("name"));
+        
         // $expires    = $now->modify('+1 day')->getTimestamp();
         // $key = $this->config->jwt['passphrase'];
         // $payload = array(

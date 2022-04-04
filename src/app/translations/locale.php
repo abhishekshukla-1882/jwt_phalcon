@@ -3,8 +3,8 @@ return [
     'Navbar'=> 'Barre de navigation',
     'Checkout'=>'Vérifier',
     'Setting'=>'Réglage',
-    'Add Product'=>'Ajouter un produit',
-    'Add Role'=>'Ajouter un rôle',
+    'Add_Product'=>'Ajouter un produit',
+    'Add_Role'=>'Ajouter un rôle',
     'Action'=>'action',
-    'Product List'=>'Liste de produits'
+    'Product_List'=>'Liste de produits'
 ];

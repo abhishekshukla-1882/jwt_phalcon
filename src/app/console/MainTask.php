@@ -85,9 +85,7 @@ class MainTask extends Task
         unlink('../app/security/acl.cathe');
     }
     public function neworderAction(){
-        $order = \Orders::findFirst([
-            "order"=>'order_id desc'
-        ]);
+        $order = \Orders::findFirst();
         echo $order;
         echo PHP_EOL;
     }

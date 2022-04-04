@@ -1,3 +1,17 @@
+
+<?php
+// print_r($this->cache);
+// die; 
+      $this->cache->set('Setting',$this->translator->_('Setting'));
+      $this->cache->set('Add_Product',$this->translator->_('Add_Product'));
+      $this->cache->set('Add_Role',$this->translator->_('Add_Role'));
+      $this->cache->set('Action',$this->translator->_('Action'));
+      $this->cache->set('Product_List',$this->translator->_('Product_List'));
+    //   // die; 
+    // echo $this->cache->get('Setting'); 
+    // die;
+      
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -57,10 +71,23 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li> -->
       <li class="nav-item card p-3 m-3">
-        <a class="nav-link" href="order"><?php echo $this->translator->_('Checkout') ?></a>
+        <a class="nav-link" href="order"><?php 
+        if($this->cache->has('checkout')){
+          echo $this->cache->get('Checkout');
+
+        }else{
+        echo $this->translator->_('Checkout'); }?>
+        </a>
+    
       </li>
       <li class="nav-item card p-3 m-3">
-        <a class="nav-link" href="/setting"><?php echo $this->translator->_('Setting') ?></a>
+        <a class="nav-link" href="/setting"><?php 
+        if( $this->cache->has('Setting')){
+          echo $this->cache->get('Setting');
+        }
+        // echo $this->translator->_('Setting')
+         ?>
+        </a>
       </li>
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,16 +101,36 @@
         </div>
       </li> -->
       <li class="nav-item card p-3 m-3">
-        <a class="nav-link " href="addpro"><?php echo $this->translator->_('Add Product') ?></a>
+        <a class="nav-link " href="addpro">
+        <?php 
+        if( $this->cache->has('Add_Product')){
+          echo $this->cache->get('Add_Product');
+        }
+       ?>
+       </a>
       </li>
       <li class="nav-item card p-3 m-3">
-        <a class="nav-link card" href="role"><?php echo $this->translator->_('Add Role') ?></a>
+      <a class="nav-link" href="/role"><?php 
+        if( $this->cache->has('Add_Role')){
+          echo $this->cache->get('Add_Role');
+        }
+        // echo $this->translator->_('Setting')
+         ?>
+        </a>
       </li>
       <li class="nav-item card p-3 m-3">
-        <a class="nav-link " href="role/action"><?php echo $this->translator->_('Action') ?></a>
+   
+      <a class="nav-link" href="role/action"><?php 
+        if( $this->cache->has('Action')){
+          echo $this->cache->get('Action');
+        }
+        // echo $this->translator->_('Setting')
+         ?>
+        </a>/a>
       </li>
       <li class="nav-item card p-3 m-3">
-        <a class="nav-link " href="index/list"><?php echo $this->translator->_('Product List') ?></a>
+      
+        <a class="nav-link " href="index/list"><?php echo $this->translator->_('Product_List') ?></a>
       </li>
     </ul>
    </div>

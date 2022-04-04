@@ -23,7 +23,9 @@ use Phalcon\Config\ConfigFactory;
 use Phalcon\Events\Event;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-
+use Phalcon\Cache;
+use Phalcon\Cache\AdapterFactory;
+use Phalcon\Storage\SerializerFactory;
 
 $config = new Config([]);
 $filename = '../app/etc/config.php';
@@ -218,6 +220,21 @@ $container->set(
 //        return $cookies; 
 //     } 
 //  ); 
+
+
+$serializerFactory = new SerializerFactory();
+$adapterFactory    = new AdapterFactory($serializerFactory);
+
+$options = [
+    'defaultSerializer' => 'Json',
+    'lifetime'          => 7200
+];
+
+$adapter = $adapterFactory->newInstance('apcu', $options);
+
+$cache = new Cache($adapter);
+$container->set("cache",$cache);
+
 
 
 
